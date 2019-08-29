@@ -75,6 +75,8 @@
     android:orientation="horizontal"
     android:layout_marginTop="10dp">
         <ImageView
+            android:src="@drawable/cart"
+            android:tint="@color/colorPrimary"
         android:layout_width="40dp"
     android:layout_height="40dp"
     android:id="@+id/cart_icon"
@@ -82,6 +84,8 @@
     android:padding="10dp"
     />
     <ImageView
+        android:src="@drawable/ic_heart"
+        android:tint="@color/colorPrimary"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/wish_list_icon"

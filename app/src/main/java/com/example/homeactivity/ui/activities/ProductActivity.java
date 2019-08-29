@@ -11,15 +11,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.homeactivity.R;
 import com.example.homeactivity.adapters.TabAdapter;
+import com.example.homeactivity.auth.LoginDialogFragment;
 import com.example.homeactivity.ui.fragments.DynamicFragment;
+import com.example.homeactivity.utils.SharedPreferenceConfig;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-public class ProductActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class ProductActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static ImageView bottomAppBarCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +32,17 @@ public class ProductActivity extends AppCompatActivity
         Toolbar mainToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mainToolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        bottomAppBarCart = findViewById(R.id.bottm_cartmage);
+        bottomAppBarCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!new SharedPreferenceConfig(ProductActivity.this).isloggedIn()){
+                    new LoginDialogFragment(ProductActivity.this).startDialog(getSupportFragmentManager());
+                }else{
+                    startActivity(new Intent(ProductActivity.this,CartActivity.class));
+                }
+            }
+        });
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, mainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
